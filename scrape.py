@@ -13,7 +13,7 @@ driver = webdriver.Chrome(service=s)
 driver.get('https://sis.nyu.edu/psc/csprod/EMPLOYEE/SA/c/NYU_SR.NYU_CLS_SRCH.GBL')
 def scrape(n=99999):
     classes="[\n"
-    delay = 10 # seconds
+    delay = 60 # seconds
     for x in range(1,n+1):
         try:
             search=driver.find_element(By.ID, 'LINK1$'+str(x))
