@@ -7,13 +7,13 @@ from selenium.common.exceptions import TimeoutException
 
 
 s= Service('./webdriver/chromedriver.exe')
-f=open("classes.json","w")
+f=open("classes.json","w", encoding="utf-8")
 driver = webdriver.Chrome(service=s)
 
 driver.get('https://sis.nyu.edu/psc/csprod/EMPLOYEE/SA/c/NYU_SR.NYU_CLS_SRCH.GBL')
 def scrape(n=99999):
     classes="[\n"
-    delay = 60 # seconds
+    delay = 600 # seconds
     for x in range(1,n+1):
         try:
             search=driver.find_element(By.ID, 'LINK1$'+str(x))
@@ -29,7 +29,7 @@ def scrape(n=99999):
             eee=driver.find_elements_by_tag_name("b")
 
             for i in eee:
-                if(i.value_of_css_property('font-size')=='19.2px' and i.text!=''):
+                if(i.value_of_css_property('font-size')=='19.2px' and i.text!='' and len(i.text.split(" ", 2))==3):
                     text=i.text.replace('\"','\\\"')
                     text=text.replace('\n',' ')
                     classs=text.split(" ", 2)
